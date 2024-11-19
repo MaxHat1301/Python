@@ -5,33 +5,32 @@ class Task:
         self.deadline = deadline
         self.completed = False
 
-    def mark_as_completed(self):
+    def mark_completed(self):
         self.completed = True
 
     def str(self):
         status = "Виконано" if self.completed else "Не виконано"
-        return (f"Назва: {self.title}\n"
-                f"Опис: {self.description}\n"
-                f"Дедлайн: {self.deadline}\n"
-                f"Стан: {status}")
+        return f"{self.title} - {self.description} (Дедлайн: {self.deadline}, Стан: {status})"
+
 
 class TaskManager:
     def __init__(self):
         self.tasks = []
+
     def add_task(self, task):
         self.tasks.append(task)
+
     def remove_task(self, title):
         self.tasks = [task for task in self.tasks if task.title != title]
-    def mark_task_as_completed(self, title):
+
+    def mark_task_completed(self, title):
         for task in self.tasks:
             if task.title == title:
-                task.mark_as_completed()
-                break
+                task.mark_completed()
 
-    def display_tasks(self):
+    def show_tasks(self):
         if not self.tasks:
-            print("Список завдань порожній.")
+            print("Завдань немає.")
         else:
-            for idx, task in enumerate(self.tasks, 1):
-                print(f"\nЗавдання #{idx}")
+            for task in self.tasks:
                 print(task)
